@@ -30,7 +30,6 @@ const CartPage = () => {
               </div>
               <button type="button" className='cart-clear-btn flex fs-15 fw-6 text' onClick={() => clearCart()}>
                 {/* <MdClear className='text-pink' /> */}
-                
               </button>
             </div>
 
@@ -43,7 +42,7 @@ const CartPage = () => {
             </div>
           </div>
 
-          {/* <div className='cart-grid-right'>
+         {/*  <div className='cart-grid-right'>
             <div className='cart-total'>
               <span className='d-block fs-18 fw-6'>Total:</span>
               <div className='cart-total-value fw-8'>${total_amount.toFixed(2)}</div>

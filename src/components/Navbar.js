@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className='container w-100'>
         <div className='brand-and-toggler flex flex-between w-100'>
           <Link to="/" className='navbar-brand text-uppercase ls-1 fw-8'>
-            <span>libary</span>system
+            <span>Library</span>system
           </Link>
 
           <div className='navbar-btns flex'>
@@ -101,7 +101,7 @@ const NavbarWrapper = styled.nav`
     align-items: center;
     
     .username {
-      margin: 30px;
+      margin-right: 15px;
       font-size: 18px;
       font-weight: bold;
       color: var(--clr-dark);
