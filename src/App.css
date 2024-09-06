@@ -78,12 +78,14 @@ input, textarea, select{
 @media screen and (min-width: 768px){
     .container{
         padding: 0 3.4rem;
+        
     }
 }
 
 @media screen and (min-width: 1400px){
     .container{
         padding: 0 1rem;
+       
     }
 }
 
