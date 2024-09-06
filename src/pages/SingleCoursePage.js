@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { useCartContext } from '../context/cart_context';
+import { useCoursesContext } from '../context/courses_context';
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../context/cart_context';
 import axios from 'axios';
-import { useAuthContext } from '../context/auth_context'; // Import auth context
 
 const SingleCoursePage = () => {
-  const { id } = useParams(); // Getting the book/course ID from the URL
+  const { id } = useParams(); // Correct use of "id" to match the URL param
   const { addToCart } = useCartContext();
-  const { user } = useAuthContext(); // Get the logged-in customerId from auth context
   const [course, setCourse] = useState({});
   const [reviews, setReviews] = useState([]);
-  const [comment, setComment] = useState(''); // State to capture review comment
 
   // Fetch course details based on the ID
   useEffect(() => {
@@ -29,47 +27,24 @@ const SingleCoursePage = () => {
     fetchSingleCourse();
   }, [id]);
 
-  // Define fetchReviews as a separate function
-  const fetchReviews = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8100/books/${id}/reviews`); // Fetch reviews for this book
-      setReviews(response.data);
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    }
-  };
-
-  // Fetch reviews when the component mounts
+  // Fetch reviews
   useEffect(() => {
-    fetchReviews();
-  }, [id]);
-
-  // Handle form submission for posting a review
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (!user) {
-        alert("You need to be logged in to submit a review.");
-        return;
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('http://localhost:8100/reviews');
+        setReviews(response.data);
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
       }
-      const response = await axios.post(`http://localhost:8100/customers/${user}/books/${id}/reviews`, {
-        comment,
-        reviewDate: new Date().toISOString(), // Send the current date
-      });
-      console.log('Review submitted:', response.data);
-      setComment(''); // Clear the form after successful submission
-      fetchReviews(); // Re-fetch reviews to show the new one
-    } catch (error) {
-      console.error('Error submitting the review:', error);
-    }
-  };
+    };
+    fetchReviews();
+  }, []);
 
   const { name, author, outline, img } = course;
 
   return (
     <SingleCourseWrapper>
       <div className='course-intro mx-auto grid'>
-        {/* Course details */}
         <div className='course-img'>
           <img src={img} alt={name} />
         </div>
@@ -83,7 +58,7 @@ const SingleCoursePage = () => {
           </div>
           <div className='course-btn'>
             <Link to="/cart" className='add-to-cart-btn d-inline-block fw-7 bg-purple' onClick={() => addToCart(id, name, author, outline, img)}>
-              <FaShoppingCart /> Borrow
+              <FaShoppingCart /> Add to cart
             </Link>
           </div>
         </div>
@@ -99,6 +74,7 @@ const SingleCoursePage = () => {
                   <li key={idx}>
                     <div>
                       <span>Customer: {review.customer.name}</span><br />
+                      <span>Book: {review.book.name}</span><br />
                       <span>Date: {review.reviewDate}</span><br />
                       <span>Comment: {review.comment}</span><br />
                     </div>
@@ -114,14 +90,8 @@ const SingleCoursePage = () => {
         <div className='course-content mx-auto'>
           <div className='course-sc-title'>Write Reviews</div>
           <ul className='course-content-list'>
-            <form className='write' onSubmit={handleSubmit}>
-              <input
-                type='text'
-                placeholder='Write your comment.'
-                className='comment mx-auto'
-                value={comment}
-                onChange={(e) => setComment(e.target.value)} // Update comment state on input change
-              /><br />
+            <form className='write'>
+              <input type='text' placeholder='Write your comment.' className='comment mx-auto' /><br />
               <button type='submit' className='writeDone'>Send</button>
             </form>
           </ul>
@@ -266,4 +236,4 @@ const SingleCourseWrapper = styled.div`
 
 `;
 
-export default SingleCoursePage;
+export default SingleCoursePage
