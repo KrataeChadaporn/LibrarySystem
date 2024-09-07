@@ -30,7 +30,7 @@ const CartPage = () => {
               </div>
               <button type="button" className='cart-clear-btn flex fs-15 fw-6 text' onClick={() => clearCart()}>
                 {/* <MdClear className='text-pink' /> */}
-                
+               
               </button>
             </div>
 

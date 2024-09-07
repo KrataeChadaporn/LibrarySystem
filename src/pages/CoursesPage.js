@@ -1,22 +1,19 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+
 import styled from "styled-components";
 import Course from "../components/Course";
-import { useCoursesContext } from '../context/courses_context';
+
 
 const CoursesPage = () => {
-  const {category} = useParams();
-  const {courses} = useCoursesContext();
+  // const {category} = useParams();
+  // const {courses} = useCoursesContext();
 
   return (
     <CoursesPageWrapper>
       <div className='container'>
         <div className='category-based-list'>
-          {
-            courses.filter(course => course.category === category).map((course) => (
-              <Course key = {course.id} {...course} />
-            ))
-          }
+          
+              <Course/>
         </div>
       </div>
     </CoursesPageWrapper>
@@ -45,7 +42,7 @@ const CoursesPageWrapper = styled.div`
     .category-based-list{
       display: grid;
       gap: 26px;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 `;

@@ -25,7 +25,7 @@ function LoginReg({ className }) {
 const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.get(`http://localhost:8100/login`, {
+        const response = await axios.get(`http://localhost:8900/login`, {
             params: {
                 email: loginEmail,
                 phone: loginPhone,
@@ -52,7 +52,7 @@ const handleLogin = async (e) => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8100/customers', {
+            const response = await axios.post('http://localhost:8900/customers', {
                 email: regEmail,
                 name: regName,
                 address: regAddress,
@@ -249,4 +249,3 @@ export default styled(LoginReg)`
     transition: all 0.5s ease-in-out;
   }
 `;
-

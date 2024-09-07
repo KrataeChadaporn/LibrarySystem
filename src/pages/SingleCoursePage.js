@@ -32,7 +32,7 @@ const SingleCoursePage = () => {
   // Define fetchReviews as a separate function
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`http://localhost:8100/books/${id}/reviews`); // Fetch reviews for this book
+      const response = await axios.get(`http://localhost:8400/books/${id}/reviews`); // Fetch reviews for this book
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -52,7 +52,7 @@ const SingleCoursePage = () => {
         alert("You need to be logged in to submit a review.");
         return;
       }
-      const response = await axios.post(`http://localhost:8100/customers/${user}/books/${id}/reviews`, {
+      const response = await axios.post(`http://localhost:8400/customers/${user}/books/${id}/reviews`, {
         comment,
         reviewDate: new Date().toISOString(), // Send the current date
       });
@@ -65,14 +65,14 @@ const SingleCoursePage = () => {
   };
 
   const { name, author, outline, img } = course;
-
+ 
   return (
     <SingleCourseWrapper>
       <div className='course-intro mx-auto grid'>
         {/* Course details */}
-        <div className='course-img'>
+       {/*  <div className='course-img'>
           <img src={img} alt={name} />
-        </div>
+        </div> */}
         <div className='course-details'>
           <div className='course-category bg-white text-dark text-capitalize fw-6 fs-12 d-inline-block'>{author}</div>
           <div className='course-head'>
@@ -99,6 +99,7 @@ const SingleCoursePage = () => {
                   <li key={idx}>
                     <div>
                       <span>Customer: {review.customer.name}</span><br />
+                      <span>Book Name:{review.book.name}</span>
                       <span>Date: {review.reviewDate}</span><br />
                       <span>Comment: {review.comment}</span><br />
                     </div>

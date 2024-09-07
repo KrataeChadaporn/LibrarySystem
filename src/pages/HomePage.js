@@ -8,7 +8,7 @@ const HomePage = () => {
     <div className='holder'>
       <Hero />
       <CoursesList />
-      <CategoriesList />
+  {/*     <CategoriesList /> */}
     </div>
   )
 }

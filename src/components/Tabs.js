@@ -1,45 +1,23 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import Course from "./Course";
-import {PYTHON, WEB_DEVELOPMENT, DATA_SCIENCE, AWS, DESIGN, MARKETING} from "../utils/constants";
-import courses from '../utils/data';
+import {PYTHON} from "../utils/constants";
+
 
 const Tabs = () => {
-  const [activeTab, setActiveTab] = useState(PYTHON);
-  const tabHandler = (category) => {
-    setActiveTab(category);
-  }
+  
 
   return (
     <TabsWrapper>
       <div className='tabs'>
-        <ul className='flex flex-wrap'>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === PYTHON}`} onClick = {() => tabHandler(PYTHON)}>Python</button>
-          </li>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === WEB_DEVELOPMENT}`} onClick = {() => tabHandler(WEB_DEVELOPMENT)}>Web Development</button>
-          </li>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === DATA_SCIENCE}`} onClick = {() => tabHandler(DATA_SCIENCE)}>Data Science</button>
-          </li>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === AWS}`} onClick = {() => tabHandler(AWS)}>AWS Certification</button>
-          </li>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === DESIGN}`} onClick = {() => tabHandler(DESIGN)}>Design</button>
-          </li>
-          <li className='tabs-head-item'>
-            <button type = "button" className={`tab-btn ${activeTab === MARKETING}`} onClick = {() => tabHandler(MARKETING)}>Marketing</button>
-          </li>
-        </ul>
+       
 
         <div className='tabs-body'>
-          {
-            courses.filter(course => course.category === activeTab).map((course) => (
-              <Course key = {course.id} {...course} />
-            ))
-          }
+          
+      
+              <Course  />
+          
+          
         </div>
       </div>
     </TabsWrapper>
