@@ -29,9 +29,9 @@ const Course = () => {
   }
 
   const courseElements = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < courses.length; i++) {
     const { id, name, author, outline, img } = courses[i]; 
-    const image= require(`../../src/assets/images/${img}`); // Reference the image from the public folder
+    const image = require(`../../src/assets/images/${img}`); // Reference the image from the public folder
     courseElements.push(
       <CourseCard key={id}>
         <div className='item-img'>
@@ -42,7 +42,7 @@ const Course = () => {
           <span className='item-creator'>Author: {author}</span>
           <div className='item-btns flex'>
             <Link to={`/courses/${id}`} className="item-btn see-details-btn">See details</Link>
-            <Link to="/cart" className='item-btn add-to-cart-btn' onClick={() => addToCart(id, name, author, outline, img)}>Borrow</Link>
+            <Link to="/cart" className='item-btn add-to-cart-btn' onClick={() => addToCart(id, name, author, outline, img)}>Add to Borrow</Link>
           </div>
         </div>
       </CourseCard>
@@ -117,5 +117,4 @@ const CourseCard = styled.div`
     }
   }
 `;
-
 export default Course;
